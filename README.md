@@ -1,1 +1,3 @@
-Blog Curso Otavio Miranda Python
+### Blog Curso Otavio Miranda Python
+
+-   Projeto Blog Django
