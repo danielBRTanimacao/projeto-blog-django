@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.http import HttpRequest
 from site_setup.models import MenuLink, SiteSetup
 
 # Register your models here.
