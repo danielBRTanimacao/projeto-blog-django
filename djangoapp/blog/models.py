@@ -61,7 +61,13 @@ class Page(models.Model):
         blank=True,
         max_length=255
     )
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(
+        default=False,
+        help_text=(
+            'Este campo precisará estar marcado '
+            'para a página ser exibida publicamente.'
+        ),
+    )
     content = models.TextField()
 
     def save(self, *args, **kwargs):
