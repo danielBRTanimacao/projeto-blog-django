@@ -34,7 +34,7 @@
                 <div class="post-meta-item">
                     <a class="post-meta-link" href="#">
                         <i class="fa-solid fa-calendar-days"></i>
-                        <span> 20/04/2023 </span>
+                        <span> {{post.created_at | date:'d/m/Y \à\s H:i'}} </span>
                     </a>
                 </div>
                 <div class="post-meta-item">
@@ -46,45 +46,25 @@
             </div>
 
             <p class="single-post-excerpt pb-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore,
-                vero fugiat eum perferendis accusamus enim quos obcaecati.
-                Voluptates a vel obcaecati ipsa in dignissimos facere odio et,
-                ab provident assumenda!
+                {{ post.excerpt | safe }}
             </p>
 
             <div class="separator"></div>
 
             <div class="single-post-content">
-                {% include 'blog/partials/_temp.html' %}
+                {{ post.content | safe }}
 
-                <div class="post-tags">
-                    <span>Tags: </span>
-
-                    <a class="post-tag-link" href="#">
-                        <i class="fa-solid fa-link"></i>
-                        <span>Testando</span>
-                    </a>
-
-                    <a class="post-tag-link" href="#">
-                        <i class="fa-solid fa-link"></i>
-                        <span>Atenção</span>
-                    </a>
-
-                    <a class="post-tag-link" href="#">
-                        <i class="fa-solid fa-link"></i>
-                        <span>Obrigado</span>
-                    </a>
-
-                    <a class="post-tag-link" href="#">
-                        <i class="fa-solid fa-link"></i>
-                        <span>Educação</span>
-                    </a>
-
-                    <a class="post-tag-link" href="#">
-                        <i class="fa-solid fa-link"></i>
-                        <span>Python</span>
-                    </a>
-                </div>
+                {% if post.tags.all.exists %}   
+                    <div class="post-tags">
+                        <span>Tags: </span>
+                        {% for Tags in post.tags %}                        
+                            <a class="post-tag-link" href="{% url "blog:tag" tag.slug %}">
+                                <i class="fa-solid fa-link"></i>
+                                <span>{{ tag.name }}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
