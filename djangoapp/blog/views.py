@@ -71,4 +71,22 @@ class CreatedByListView(PostListView):
     
 
 class CategoryListView(PostListView):
-    ...
+    allow_empty = False
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return super().get_queryset().filter(
+            catetogy__slug=self.kwargs.get('slug')
+        )
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        ctx = super().get_context_data(**kwargs) 
+        
+        page_title = f'{self.object_list[0].category.name} - Categoria - '
+
+        ctx.update(
+            {
+                'page_title': page_title
+            }
+        )
+
+        return ctx
